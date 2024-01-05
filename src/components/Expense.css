@@ -8,6 +8,15 @@
     border-radius: 12px;
     background-color: #4b4b4b;
   }
+  .place {
+    color:white;
+  }
+  .place_holder{
+    color:white;
+    padding-left: 5px;
+    padding-right:5px;
+  }
+  
   
   .expense-item__description {
     display: flex;
