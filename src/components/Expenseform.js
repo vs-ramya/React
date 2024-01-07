@@ -1,12 +1,12 @@
 //import React,{useState} from "react";
-function Expenseform() {  
+function Expenseform(props) {  
     
     function clickHandler(event) {
-            event.preventDefault();
-            let newExpense=document.getElementById('name');
+    event.preventDefault();
+    let newExpenses=document.getElementById('name');
     let newAmount=document.getElementById('money');
     let newDate=document.getElementById('calendar');
-    let name=newExpense.value;
+    let name=newExpenses.value;
     let amount=newAmount.value;
     let Date= newDate.value;
             let obj={
@@ -15,7 +15,11 @@ function Expenseform() {
                 ExpenseDate:Date,
 
             }
-            console.log(obj);
+            //calling custom component from child to parent ,we can able to access it eventhough it is not in this module because
+            // of this line <Expenseform saveData={saveDataHandler}></Expenseform> as the saveData propt points the savedatahandler() function
+            //saveData super important parent thet calls child to parent 
+
+            props.saveData(obj);
 
 
         }
@@ -30,7 +34,7 @@ function Expenseform() {
                 <input type='text' name="amount" id='money'  ></input>
                 <label>Date: </label>
                 <input type='date' min='2022-01-01' max='2023-12-31' name="date" id='calendar'></input> 
-                <span> <button type="submit" onClick={clickHandler}>Add Expense</button></span>
+                <span> <button type="submit" onClick={clickHandler}>Add Expense</button> </span>
                 
         
             </form>
