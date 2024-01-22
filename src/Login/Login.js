@@ -13,17 +13,26 @@ const Login = (props) => {
   const [collegeIsValid, setcollegeIsValid] = useState(false);
   const [formIsValid,setFormIsValid]=useState(false);
   useEffect(() => {
-    setFormIsValid(
-      enteredEmail.includes('@') &&
-      enteredPassword.trim().length > 6 &&
-      enteredcollege.trim().length !== 0
-    );
+    const identifier=setTimeout(()=> {
+      setFormIsValid(
+        enteredEmail.includes('@') &&
+        enteredPassword.trim().length > 6 &&
+        enteredcollege.trim().length !== 0
+      );
+      console.log('hello');
+
+    },10000)
+    return(()=>{
+      clearTimeout(identifier);
+      console.log('welcome');
+
+    })
   }, [enteredEmail, enteredPassword, enteredcollege]);
-  
+
   const emailChangeHandler = (event) => {
     setEnteredEmail(event.target.value);
 
-   
+
   };
 
   const passwordChangeHandler = (event) => {
@@ -97,7 +106,7 @@ const collegeChangeHandler =(event) => {
     onBlur={validatecollegeHandler}
   />
 </div>
-        
+
         <div className={classes.actions}>
           <Button type="submit" className={classes.btn} disabled={!formIsValid}>
             Login
