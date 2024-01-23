@@ -4,6 +4,7 @@ import React, { useState,useEffect } from 'react';
 import Login from './Login/Login';
 import Home from './Home/Home';
 import MainHeader from './MainHeader/MainHeader';
+import Authcontext from './Store/Authcontext';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -31,13 +32,25 @@ function App() {
   };
 
   return (
-    <React.Fragment>
-      <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
+     
+      <Authcontext.Provider
+       value={{
+          isLoggedIn:isLoggedIn,
+       }}>
+      <MainHeader onLogout={logoutHandler} />
       <main>
         {!isLoggedIn && <Login onLogin={loginHandler} />}
         {isLoggedIn && <Home onLogout={logoutHandler} />}
       </main>
-    </React.Fragment>
-  );
+      </Authcontext.Provider>
+      );
 }
 export default App;
+//For  <Authcontext.Provider>
+
+    /*its not a component but with a dot we acan access the property of the authcontext that contains the component
+      and it's the provider   
+      Authcontext.provider is a component and we can use it in our jsx code
+      and we can wrap it around other component 
+      those other component and all their descendent component will now have the access to it */
+//now remove all the things that is being passed from props related to isloggedin
