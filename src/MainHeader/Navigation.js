@@ -1,14 +1,17 @@
 import React from 'react';
+import { useContext } from 'react';
 import classes from './Navigation.module.css';
 import Authcontext from '../Store/Authcontext';
 
 const Navigation = (props) => {
-  return (
-    <Authcontext.Consumer>
-       {((ctx) => {
+  //Using use context hook instead of consumer method because it's simple
+  //Usecontext allows us to use context and allows us to tap and listen to it
+  //Inorder to use UseContext remove consumer and then call the authcontext inside usecontext
+  const ctx=useContext(Authcontext);
         return (
           <nav className={classes.nav}>
           <ul>
+        
             {ctx.isLoggedIn && (
               <li>
                 <a href="/">Users</a>
@@ -27,11 +30,6 @@ const Navigation = (props) => {
           </ul>
         </nav>
         )
-
-      })}
-    
-    </Authcontext.Consumer>
-  );
 };
 
 export default Navigation;
